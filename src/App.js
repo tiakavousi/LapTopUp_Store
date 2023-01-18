@@ -4,6 +4,8 @@ import Nav from "./Nav";
 import {laptopsData} from "./data/laptops";
 import LaptopCard from "./LaptopCard";
 
+
+
 class App extends Component {
 
     // state of the app is constructed here
@@ -11,21 +13,25 @@ class App extends Component {
         super(props);
         this.state = {
             laptops: [],
+
             userDetails: {
                 name: '',
                 address: '',
                 payment: ''
             },
+
             selectedLaptop: {
                 brand: '',
                 model: '',
                 cpu: '',
                 memory: 8,
-                storage: 256
+                storage: 256,
+                price : ''
             },
-            totalPrice : 1000
+            totalPrice : 0
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSelectLaptop = this.handleSelectLaptop.bind(this);
     }
 
     // when component mounted the laptops from data assigns to state
@@ -50,38 +56,41 @@ class App extends Component {
         this.setState({
             selectedLaptop: laptop,
             totalPrice: totalPrice
-        });
+        }, () => console.log("SELECTED LAPTOP:\n ", this.state.selectedLaptop,
+            "TOTAL PRICE = ", this.state.totalPrice));
     }
-
-    handleUserDetails = (event) => {
-        if(this.state.userDetails){
-            this.setState({
-                userDetails: {
-                    ...this.state.userDetails,
-                    [event.target.name]: event.target.value
+    //TODO: FAULTY PRICE CALCULATION
+    handleChangeDetails = (event) => {
+        const { name, value } = event.target;
+        let totalPrice = this.calculatePrice(name, value);
+        this.setState({totalPrice: totalPrice});
+        this.setState(prevState => {
+            return {
+                selectedLaptop: {
+                    ...prevState.selectedLaptop,
+                    [name]: value
                 }
-            });
-        }
+            }
+        }, () => console.log("SELECTED LAPTOP:\n ", this.state.selectedLaptop,
+            "TOTAL PRICE = ", this.state.totalPrice));
+        this.setState({totalPrice: totalPrice}, ()=>{console.log("handleChangeDetails happening!!!", this.state.totalPrice)});
     }
-
-     calculatePrice(laptop) {
-         let basePrice = 0;
-         switch (laptop.brand) {
-             case 'MacBook':
-                 basePrice = 1500;
-                 break;
-             case 'Dell':
-                 basePrice = 1200;
-                 break;
-             case 'Lenovo':
-                 basePrice = 900;
-                 break;
-             default:
-                 basePrice = 1000;
+    //TODO : CALCULATE THE PRICE BASED ON THE MEMORY AND STORAGE SELECTED
+     calculatePrice(name, value) {
+        console.log(name, value);
+         let basePrice = this.state.totalPrice;
+         console.log(this.state.selectedLaptop.price)
+         if(name == "memory") {
+             console.log("memory changing!!!!!!!");
+             let extraMemory = parseInt(this.state.selectedLaptop.memory) / 8;
+             console.log("extra memory = ", extraMemory);
+             basePrice = basePrice + (extraMemory * 500);
+         } if(name === "storage") {
+             console.log("storage changing!!!!!!!");
+             let extraStorage = parseInt(this.state.selectedLaptop.storage) / 256;
+             console.log("extra storage = ", extraStorage);
+             basePrice = basePrice + (extraStorage * 500) ;
          }
-         if (laptop.cpu === 'i7') basePrice += 200;
-         if (laptop.memory > 8) basePrice += (laptop.memory - 8) * 50;
-         if (laptop.storage > 256) basePrice += (laptop.storage - 256) * 20;
          return basePrice;
      }
 
@@ -100,7 +109,7 @@ class App extends Component {
     render() {
         // destructuring the state to make it easy to use without using this.state before the state fields.
         const {laptops, selectedLaptop} = this.state;
-        const {handleLaptopSelection} = this;
+        const {handleSelectLaptop} = this;
         return (
             <div className="App">
                 <Container fluid>
@@ -108,7 +117,7 @@ class App extends Component {
                     <Row>
                     {laptops.map( (laptop) => {
                         return (
-                            <LaptopCard laptop={laptop} key={laptop.id} handleSelectLaptop={this.handleSelectLaptop}/>
+                            <LaptopCard laptop={laptop} key={laptop.id} handleSelectLaptop={handleSelectLaptop}/>
                         );
                     })}
                     </Row>
@@ -123,7 +132,7 @@ class App extends Component {
                                                 type="text"
                                                 name="brand"
                                                 defaultValue={selectedLaptop.brand}
-                                                onChange={handleLaptopSelection}
+                                                readOnly
                                             />
                                         </Form.Group>
                                         <Form.Group controlId="formModel">
@@ -132,8 +141,8 @@ class App extends Component {
                                                 type="text"
                                                 name="model"
                                                 defaultValue={selectedLaptop.model}
-                                                onChange={handleLaptopSelection}
                                                 placeholder="Enter model name"
+                                                readOnly
                                             />
                                         </Form.Group>
                                         <Form.Group controlId="formCPU">
@@ -142,7 +151,7 @@ class App extends Component {
                                                 type="text"
                                                 name="cpu"
                                                 defaultValue={selectedLaptop.cpu}
-                                                onChange={handleLaptopSelection}
+                                                readOnly
                                             />
                                         </Form.Group>
                                         <Form.Group controlId="formMemory">
@@ -152,7 +161,7 @@ class App extends Component {
                                                 name="memory"
                                                 min="8"
                                                 defaultValue="8"
-                                                onChange={handleLaptopSelection}
+                                                onChange={this.handleChangeDetails}
                                                 placeholder="Enter memory size"
                                             >
                                                 <option value="8">8</option>
@@ -167,7 +176,7 @@ class App extends Component {
                                                 name="storage"
                                                 min="256"
                                                 defaultValue="256"
-                                                onChange={handleLaptopSelection}
+                                                onChange={this.handleChangeDetails}
                                                 placeholder="Enter storage size"
                                             >
                                                 <option value="256">256Gb SSD</option>

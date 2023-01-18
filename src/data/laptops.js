@@ -6,7 +6,7 @@ export const laptopsData = [
         "cpu": "i7",
         "memory": "8",
         "storage": "256",
-      "price": "$2000",
+      "price": "2000",
       "description": "same size as a pad of paper! MacBook Air comes with built-in Bluetooth wireless technology for connecting and synching the laptop to a PDA, cell phone or wireless headset."
     },
     {
@@ -16,7 +16,7 @@ export const laptopsData = [
         "cpu": "i5",
         "memory": "8",
         "storage": "256",
-      "price": "$3200",
+      "price": "3200",
       "description": "a macOS laptop with a 13.30-inch display that has a resolution of 2560x1600 pixels It is powered by a Core i5 processor and it comes with 12GB of RAM. The Apple MacBook Pro packs 512GB of SSD storage."
     },
     {
@@ -26,7 +26,7 @@ export const laptopsData = [
         "cpu": "Intel 10th Generation",
         "memory": "8",
         "storage": "256",
-      "price": "$2200",
+      "price": "2200",
       "description": "The world's most captivating 16 inch display"
     },
     {
@@ -36,7 +36,7 @@ export const laptopsData = [
         "cpu": "Intel 10th Generation",
         "memory": "8",
         "storage": "256",
-      "price": "$1600",
+      "price": "1600",
       "description": "Lenovo ThinkPad is a Windows 10 laptop with a 14.00-inch display that has a resolution of 1920x1080 pixels"
     },
     {
@@ -46,7 +46,7 @@ export const laptopsData = [
         "cpu": "AMD Ryzen™ 9 Processors",
         "memory": "8",
         "storage": "256",
-      "price": "$3100",
+      "price": "3100",
       "description": "a Dell Vostro laptop with a 13.30-inch display that has a resolution of 2560x1600 pixels"
     },
     {
@@ -56,7 +56,7 @@ export const laptopsData = [
         "cpu": "AMD Ryzen™ 7 Processors",
         "memory": "8",
         "storage": "256",
-      "price": "$2800",
+      "price": "2800",
       "description": "a Dell Latitude laptop with a 13.30-inch display that has a resolution of 2560x1600 pixels"
     }
 ]

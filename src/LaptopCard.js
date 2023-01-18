@@ -3,7 +3,7 @@ import {Button, Card, Col} from "react-bootstrap";
 
 class LaptopCard extends Component{
     render(){
-        const {laptop} = this.props;
+        const {laptop, handleSelectLaptop} = this.props;
         return(
             <Col sm={12} md={6} lg={4} >
                 <Card className="w-100 w-md-50" style={{height: "100%", overflow:"auto"}} >
@@ -18,7 +18,7 @@ class LaptopCard extends Component{
                 </Card.Body>
                 <Card.Footer>
                     <Card.Text>price: {laptop.price}</Card.Text>
-                    <Button variant="primary"> Select to see the price </Button>
+                    <Button onClick={() => handleSelectLaptop(laptop)}>Select</Button>
                 </Card.Footer>
                 </Card>
             </Col>

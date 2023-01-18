@@ -17,9 +17,9 @@ class App extends Component {
                 payment: ''
             },
             selectedLaptop: {
-                brand: 'MacBook',
-                model: 'Pro',
-                cpu: 'i5',
+                brand: '',
+                model: '',
+                cpu: '',
                 memory: 8,
                 storage: 256
             },
@@ -45,14 +45,10 @@ class App extends Component {
         }
     }
 
-    handleLaptopSelection = (event) => {
-        let selectedLaptop = {
-            ...this.state.selectedLaptop,
-            [event.target.name]: event.target.value
-        };
-        let totalPrice = this.calculatePrice(selectedLaptop);
+    handleSelectLaptop = (laptop) => {
+        let totalPrice = this.calculatePrice(laptop);
         this.setState({
-            selectedLaptop: selectedLaptop,
+            selectedLaptop: laptop,
             totalPrice: totalPrice
         });
     }
@@ -103,7 +99,8 @@ class App extends Component {
 
     render() {
         // destructuring the state to make it easy to use without using this.state before the state fields.
-        const {laptops} = this.state;
+        const {laptops, selectedLaptop} = this.state;
+        const {handleLaptopSelection} = this;
         return (
             <div className="App">
                 <Container fluid>
@@ -111,7 +108,7 @@ class App extends Component {
                     <Row>
                     {laptops.map( (laptop) => {
                         return (
-                            <LaptopCard laptop={laptop} key={laptop.id} />
+                            <LaptopCard laptop={laptop} key={laptop.id} handleSelectLaptop={this.handleSelectLaptop}/>
                         );
                     })}
                     </Row>
@@ -123,54 +120,60 @@ class App extends Component {
                                         <Form.Group controlId="formBrand">
                                             <Form.Label>Brand</Form.Label>
                                             <Form.Control
-                                                as="select"
+                                                type="text"
                                                 name="brand"
-                                                onChange={this.handleLaptopSelection}
-                                            >
-                                                <option value="MacBook">MacBook</option>
-                                                <option value="Dell">Dell</option>
-                                                <option value="Lenovo">Lenovo</option>
-                                            </Form.Control>
+                                                defaultValue={selectedLaptop.brand}
+                                                onChange={handleLaptopSelection}
+                                            />
                                         </Form.Group>
                                         <Form.Group controlId="formModel">
                                             <Form.Label>Model</Form.Label>
                                             <Form.Control
                                                 type="text"
                                                 name="model"
-                                                onChange={this.handleLaptopSelection}
+                                                defaultValue={selectedLaptop.model}
+                                                onChange={handleLaptopSelection}
                                                 placeholder="Enter model name"
                                             />
                                         </Form.Group>
                                         <Form.Group controlId="formCPU">
                                             <Form.Label>CPU</Form.Label>
                                             <Form.Control
-                                                as="select"
+                                                type="text"
                                                 name="cpu"
-                                                onChange={this.handleLaptopSelection}
-                                            >
-                                                <option value="i5">i5</option>
-                                                <option value="i7">i7</option>
-                                            </Form.Control>
+                                                defaultValue={selectedLaptop.cpu}
+                                                onChange={handleLaptopSelection}
+                                            />
                                         </Form.Group>
                                         <Form.Group controlId="formMemory">
                                             <Form.Label>Memory (GB)</Form.Label>
                                             <Form.Control
-                                                type="number"
+                                                as="select"
                                                 name="memory"
                                                 min="8"
-                                                onChange={this.handleLaptopSelection}
+                                                defaultValue="8"
+                                                onChange={handleLaptopSelection}
                                                 placeholder="Enter memory size"
-                                            />
+                                            >
+                                                <option value="8">8</option>
+                                                <option value="16">16</option>
+                                                <option value="24">24</option>
+                                            </Form.Control>
                                         </Form.Group>
                                         <Form.Group controlId="formStorage">
                                             <Form.Label>Storage (GB)</Form.Label>
                                             <Form.Control
-                                                type="number"
+                                                as="select"
                                                 name="storage"
                                                 min="256"
-                                                onChange={this.handleLaptopSelection}
+                                                defaultValue="256"
+                                                onChange={handleLaptopSelection}
                                                 placeholder="Enter storage size"
-                                            />
+                                            >
+                                                <option value="256">256Gb SSD</option>
+                                                <option value="512">512Gb SSD</option>
+                                                <option value="1000">1TB SSD</option>
+                                            </Form.Control>
                                         </Form.Group>
                                         <hr />
                                         <h5 className="text-center">Total Price: ${this.state.totalPrice}</h5>

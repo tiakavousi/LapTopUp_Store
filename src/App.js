@@ -4,6 +4,11 @@ import Nav from "./Nav";
 import {laptopsData} from "./data/laptops";
 import LaptopCard from "./LaptopCard";
 import Forms from "./Forms";
+//TODO :
+// adding a component to display order details and orderNumber
+// adding photos
+// adding number of laptops to the order form
+// maybe creating shopping cart
 
 class App extends Component {
     constructor(props) {

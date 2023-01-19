@@ -1,5 +1,5 @@
 import React from "react";
-import {Row, Col, Card, Form, Button} from 'react-bootstrap'
+import { Col, Card, Form, Button} from 'react-bootstrap'
 
 const Forms = (props) => {
     const {selectedLaptop, handleChangeDetails, handleSubmit, totalPrice, handleUserDetails} = props;

@@ -105,7 +105,7 @@ class App extends Component {
                         );
                     })}
                     </Row>
-                    <Row className="d-flex justify-content-center">
+                    <Row id="forms" className="d-flex justify-content-center">
                         <Col xs={12} md={10}>
                             <Card>
                                 <Card.Body>

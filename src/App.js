@@ -4,11 +4,7 @@ import Nav from "./Nav";
 import {laptopsData} from "./data/laptops";
 import LaptopCard from "./LaptopCard";
 
-
-
 class App extends Component {
-
-    // state of the app is constructed here
     constructor(props) {
         super(props);
         this.state = {
@@ -19,7 +15,6 @@ class App extends Component {
                 address: '',
                 payment: ''
             },
-
             selectedLaptop: {
                 brand: '',
                 model: '',
@@ -36,9 +31,8 @@ class App extends Component {
 
     // when component mounted the laptops from data assigns to state
     componentDidMount() {
-        this.setState({laptops: laptopsData} , () => console.log(this.state.laptops));
+        this.setState({laptops: laptopsData});
     }
-
 
     handleUserDetails = (event) => {
         if(this.state.userDetails){
@@ -52,47 +46,44 @@ class App extends Component {
     }
 
     handleSelectLaptop = (laptop) => {
-        let totalPrice = this.calculatePrice(laptop);
+        let totalPrice = this.calculatePrice(laptop, null, null);
+        console.log("before assigning the total price:", this.state.totalPrice);
         this.setState({
             selectedLaptop: laptop,
             totalPrice: totalPrice
         }, () => console.log("SELECTED LAPTOP:\n ", this.state.selectedLaptop,
-            "TOTAL PRICE = ", this.state.totalPrice));
+            "TOTAL PRICE after assigning = ", this.state.totalPrice));
     }
-    //TODO: FAULTY PRICE CALCULATION
+
+
     handleChangeDetails = (event) => {
         const { name, value } = event.target;
-        let totalPrice = this.calculatePrice(name, value);
-        this.setState({totalPrice: totalPrice});
         this.setState(prevState => {
-            return {
-                selectedLaptop: {
-                    ...prevState.selectedLaptop,
-                    [name]: value
-                }
+            const updatedLaptop = {
+                ...prevState.selectedLaptop,
+                [name]: value
             }
-        }, () => console.log("SELECTED LAPTOP:\n ", this.state.selectedLaptop,
-            "TOTAL PRICE = ", this.state.totalPrice));
-        this.setState({totalPrice: totalPrice}, ()=>{console.log("handleChangeDetails happening!!!", this.state.totalPrice)});
+            const totalPrice = this.calculatePrice(updatedLaptop, name, value);
+            return {
+                selectedLaptop: updatedLaptop,
+                totalPrice: totalPrice
+            }
+        });
     }
-    //TODO : CALCULATE THE PRICE BASED ON THE MEMORY AND STORAGE SELECTED
-     calculatePrice(name, value) {
-        console.log(name, value);
-         let basePrice = this.state.totalPrice;
-         console.log(this.state.selectedLaptop.price)
-         if(name == "memory") {
-             console.log("memory changing!!!!!!!");
-             let extraMemory = parseInt(this.state.selectedLaptop.memory) / 8;
-             console.log("extra memory = ", extraMemory);
-             basePrice = basePrice + (extraMemory * 500);
-         } if(name === "storage") {
-             console.log("storage changing!!!!!!!");
-             let extraStorage = parseInt(this.state.selectedLaptop.storage) / 256;
-             console.log("extra storage = ", extraStorage);
-             basePrice = basePrice + (extraStorage * 500) ;
-         }
-         return basePrice;
-     }
+
+    calculatePrice(laptop, name, value) {
+        let basePrice = parseInt(laptop.price, 10);
+        console.log("basePrice is : ",basePrice);
+        if(name === "memory") {
+            let extraMemory = parseInt(value, 10) / 8;
+            basePrice += extraMemory * 500;
+        }
+        if(name === "storage") {
+            let extraStorage = parseInt(value, 10) / 256;
+            basePrice += extraStorage * 500;
+        }
+        return basePrice;
+    }
 
     handleSubmit(event) {
         event.preventDefault();

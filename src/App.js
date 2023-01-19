@@ -72,15 +72,18 @@ class App extends Component {
     }
 
     calculatePrice(laptop, name, value) {
+
         let basePrice = parseInt(laptop.price, 10);
-        console.log("basePrice is : ",basePrice);
+        console.log("basePrice(1600) is : ",basePrice);
         if(name === "memory") {
-            let extraMemory = parseInt(value, 10) / 8;
-            basePrice += extraMemory * 500;
+            if(parseInt(value, 10) === 16) basePrice += 500;
+            if(parseInt(value, 10) === 24) basePrice += 1000;
+            console.log("price for 16Gb memory= 2100");
+            console.log("price for 24Gb memory= 2600");
         }
         if(name === "storage") {
-            let extraStorage = parseInt(value, 10) / 256;
-            basePrice += extraStorage * 500;
+            if(parseInt(value, 10) === 512) basePrice += 500;
+            if(parseInt(value, 10) === 1000) basePrice += 1000;
         }
         return basePrice;
     }

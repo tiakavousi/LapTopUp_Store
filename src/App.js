@@ -15,6 +15,7 @@ class App extends Component {
                 address: '',
                 payment: ''
             },
+
             selectedLaptop: {
                 brand: '',
                 model: '',
@@ -23,6 +24,7 @@ class App extends Component {
                 storage: 256,
                 price : ''
             },
+
             totalPrice : 0
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,13 +48,11 @@ class App extends Component {
     }
 
     handleSelectLaptop = (laptop) => {
-        let totalPrice = this.calculatePrice(laptop, null, null);
-        console.log("before assigning the total price:", this.state.totalPrice);
+        let totalPrice = this.calculatePrice(laptop);
         this.setState({
             selectedLaptop: laptop,
             totalPrice: totalPrice
-        }, () => console.log("SELECTED LAPTOP:\n ", this.state.selectedLaptop,
-            "TOTAL PRICE after assigning = ", this.state.totalPrice));
+        });
     }
 
 
@@ -63,7 +63,7 @@ class App extends Component {
                 ...prevState.selectedLaptop,
                 [name]: value
             }
-            const totalPrice = this.calculatePrice(updatedLaptop, name, value);
+            const totalPrice = this.calculatePrice(updatedLaptop);
             return {
                 selectedLaptop: updatedLaptop,
                 totalPrice: totalPrice
@@ -71,21 +71,11 @@ class App extends Component {
         });
     }
 
-    calculatePrice(laptop, name, value) {
+    calculatePrice(laptop) {
+        return parseInt(laptop.price, 10) +
+            ((parseInt(laptop.memory, 10) / 8 - 1 ) * 500) +
+            ((parseInt(laptop.storage, 10) / 256 - 1) * 500);
 
-        let basePrice = parseInt(laptop.price, 10);
-        console.log("basePrice(1600) is : ",basePrice);
-        if(name === "memory") {
-            if(parseInt(value, 10) === 16) basePrice += 500;
-            if(parseInt(value, 10) === 24) basePrice += 1000;
-            console.log("price for 16Gb memory= 2100");
-            console.log("price for 24Gb memory= 2600");
-        }
-        if(name === "storage") {
-            if(parseInt(value, 10) === 512) basePrice += 500;
-            if(parseInt(value, 10) === 1000) basePrice += 1000;
-        }
-        return basePrice;
     }
 
     handleSubmit(event) {
@@ -116,7 +106,7 @@ class App extends Component {
                     })}
                     </Row>
                     <Row className="d-flex justify-content-center">
-                        <Col xs={12} md={4}>
+                        <Col xs={12} md={10}>
                             <Card>
                                 <Card.Body>
                                     <Form>
@@ -175,7 +165,7 @@ class App extends Component {
                                             >
                                                 <option value="256">256Gb SSD</option>
                                                 <option value="512">512Gb SSD</option>
-                                                <option value="1000">1TB SSD</option>
+                                                <option value="1024">1TB SSD</option>
                                             </Form.Control>
                                         </Form.Group>
                                         <hr />

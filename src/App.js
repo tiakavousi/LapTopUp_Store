@@ -2,9 +2,9 @@ import {Component} from "react";
 import {Container, Row} from "react-bootstrap";
 import Nav from "./components/Nav";
 import {laptopsData} from "./data/laptops";
-import LaptopCard from "./LaptopCard";
-import Forms from "./Forms";
-import OrderInvoice from "./OrderInvoice";
+import LaptopCard from "./components/LaptopCard";
+import Forms from "./components/Forms";
+import OrderInvoice from "./components/OrderInvoice";
 import Footer from "./components/Footer";
 
 //TODO :

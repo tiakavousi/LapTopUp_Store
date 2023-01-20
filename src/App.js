@@ -6,10 +6,8 @@ import LaptopCard from "./LaptopCard";
 import Forms from "./Forms";
 import OrderInvoice from "./OrderInvoice";
 //TODO :
-// adding a component to display order details and orderNumber
-// adding photos
 // adding number of laptops to the order form
-// maybe creating shopping cart
+//creating 4 pages: Home, shopping cart, orderPage, invoice
 
 class App extends Component {
     constructor(props) {

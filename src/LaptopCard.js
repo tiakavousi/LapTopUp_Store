@@ -1,6 +1,7 @@
 import {Component} from "react";
 import {Button, Card, Col} from "react-bootstrap";
 
+
 class LaptopCard extends Component{
     render(){
         const {laptop, handleSelectLaptop} = this.props;
@@ -8,7 +9,7 @@ class LaptopCard extends Component{
             <Col sm={12} md={6} lg={4} >
                 <Card className="w-100 w-md-50" style={{height: "100%", overflow:"auto"}} >
                 <Card.Header>
-                    <Card.Img variant="top" src="../photos/laptop01.jpeg" />
+                    <Card.Img variant="top" src={`./photos/${laptop.imgUrl}`}/>
                 </Card.Header>
                 <Card.Body>
                     <Card.Title> {laptop.model} </Card.Title>

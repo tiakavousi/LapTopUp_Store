@@ -1,7 +1,7 @@
 
-import {Row, Col } from 'react-bootstrap';
+import { Col, Button } from 'react-bootstrap';
 const OrderInvoice = (props) => {
-    const {selectedLaptop,totalPrice, userDetails, orderNumber } = props;
+    const {selectedLaptop,totalPrice, userDetails, orderNumber, toggleDisplay } = props;
     const paymentText =  userDetails.payment === "Credit Card" ? `Total fee ${totalPrice} has been deducted from your connected credit card.` :
         `Please provide ${totalPrice} when your purchase will be delivered.`
     return (
@@ -14,10 +14,9 @@ const OrderInvoice = (props) => {
                 <h5>
                     Your {selectedLaptop.brand},{selectedLaptop.model}, Memory: {selectedLaptop.memory}Gb , Storage: {selectedLaptop.storage}Gb has been ordered and will be delivered to {userDetails.address}
                 </h5>
-            </Col>
-            <Col xs={12} md={6}>
                 <h5>{paymentText}</h5>
             </Col>
+            <Button variant="primary" type="submit" onClick={toggleDisplay}> Continue Shopping</Button>
       </>
     );
 };

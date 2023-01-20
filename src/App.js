@@ -33,14 +33,15 @@ class App extends Component {
             },
             totalPrice : 0,
             orderNumber:0,
-            displayInvoice : "none",
-            displayForms: "block"
+            shoppingPageDisplayed: true,
+            invoiceDisplayed : false
         };
 
         // bind this to the handleSubmit and handleSelectLaptop methods, so they can access
         // the component's state and props when they are invoked.
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSelectLaptop = this.handleSelectLaptop.bind(this);
+        this.toggleDisplay = this.toggleDisplay.bind(this);
     }
 
     // when component mounted the laptops from data assigns to state
@@ -106,7 +107,12 @@ class App extends Component {
             ((parseInt(laptop.storage, 10) / 256 - 1) * 500);
 
     }
-
+    toggleDisplay(){
+        this.setState((prevState) => ({
+            shoppingPageDisplayed: !prevState.shoppingPageDisplayed,
+            invoiceDisplayed: !prevState.invoiceDisplayed,
+        }));
+    }
     handleSubmit(event) {
         // prevent the default behavior of the form submission
         event.preventDefault();
@@ -116,17 +122,18 @@ class App extends Component {
             let orderNumber = Math.floor(Math.random() * 100000);
             // display an alert with the user's details, laptop details, delivery address,
             // payment method, total price and order number
-            this.setState({orderNumber:orderNumber, displayInvoice:"block"});
+            this.setState({orderNumber});
+            this.toggleDisplay();
         }
     }
 
     render() {
         // destructuring the state and methods to make it easy to further use
-        const {laptops, selectedLaptop, totalPrice, orderNumber, userDetails, displayInvoice} = this.state;
-        const {handleSelectLaptop, handleChangeDetails, handleSubmit, handleUserDetails} = this;
+        const {laptops, selectedLaptop, totalPrice, orderNumber, userDetails, shoppingPageDisplayed, invoiceDisplayed} = this.state;
+        const {handleSelectLaptop, handleChangeDetails, handleSubmit, handleUserDetails, toggleDisplay} = this;
         return (
             <div className="App">
-                <Container fluid>
+                <Container fluid style={shoppingPageDisplayed ? {display:"block"} : {display:"none"}}>
                     {/* Nav component in a separate file is imported and used */}
                     <Nav />
                     <Row>
@@ -150,15 +157,16 @@ class App extends Component {
                             handleUserDetails={handleUserDetails}
                         />
                     </Row>
-                    <Row style={{display:displayInvoice}}>
-                        <OrderInvoice
-                            selectedLaptop={selectedLaptop}
-                            totalPrice={totalPrice}
-                            userDetails={userDetails}
-                            orderNumber ={orderNumber}
-                        />
-                    </Row>
                 </Container>
+                <Row style={invoiceDisplayed ? {display:"block"} : {display:"none"}}>
+                    <OrderInvoice
+                        selectedLaptop={selectedLaptop}
+                        totalPrice={totalPrice}
+                        userDetails={userDetails}
+                        orderNumber ={orderNumber}
+                        toggleDisplay={toggleDisplay}
+                    />
+                </Row>
             </div>
         );
     }

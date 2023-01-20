@@ -4,6 +4,7 @@ import Nav from "./Nav";
 import {laptopsData} from "./data/laptops";
 import LaptopCard from "./LaptopCard";
 import Forms from "./Forms";
+import OrderInvoice from "./OrderInvoice";
 //TODO :
 // adding a component to display order details and orderNumber
 // adding photos
@@ -30,8 +31,12 @@ class App extends Component {
                 storage: 256,
                 price : ''
             },
-            totalPrice : 0
+            totalPrice : 0,
+            orderNumber:0,
+            displayInvoice : "none",
+            displayForms: "block"
         };
+
         // bind this to the handleSubmit and handleSelectLaptop methods, so they can access
         // the component's state and props when they are invoked.
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -111,17 +116,13 @@ class App extends Component {
             let orderNumber = Math.floor(Math.random() * 100000);
             // display an alert with the user's details, laptop details, delivery address,
             // payment method, total price and order number
-            alert(`Thank you ${this.state.userDetails.name} for your purchase! Your 
-        ${this.state.selectedLaptop.brand} ${this.state.selectedLaptop.model} 
-        has been ordered and will be delivered to ${this.state.userDetails.address}. 
-        Payment Method: ${this.state.userDetails.payment} Total Price: ${this.state.totalPrice}
-        Your Order Number is ${orderNumber}`);
+            this.setState({orderNumber:orderNumber, displayInvoice:"block"});
         }
     }
 
     render() {
         // destructuring the state and methods to make it easy to further use
-        const {laptops, selectedLaptop, totalPrice} = this.state;
+        const {laptops, selectedLaptop, totalPrice, orderNumber, userDetails, displayInvoice} = this.state;
         const {handleSelectLaptop, handleChangeDetails, handleSubmit, handleUserDetails} = this;
         return (
             <div className="App">
@@ -147,6 +148,14 @@ class App extends Component {
                             handleSubmit={handleSubmit}
                             totalPrice={totalPrice}
                             handleUserDetails={handleUserDetails}
+                        />
+                    </Row>
+                    <Row style={{display:displayInvoice}}>
+                        <OrderInvoice
+                            selectedLaptop={selectedLaptop}
+                            totalPrice={totalPrice}
+                            userDetails={userDetails}
+                            orderNumber ={orderNumber}
                         />
                     </Row>
                 </Container>

@@ -1,13 +1,15 @@
 import {Component} from "react";
 import {Container, Row} from "react-bootstrap";
-import Nav from "./Nav";
+import Nav from "./components/Nav";
 import {laptopsData} from "./data/laptops";
 import LaptopCard from "./LaptopCard";
 import Forms from "./Forms";
 import OrderInvoice from "./OrderInvoice";
+import Footer from "./components/Footer";
+
 //TODO :
 // adding number of laptops to the order form
-//creating 4 pages: Home, shopping cart, orderPage, invoice
+// creating 4 pages: Home, shopping cart, orderPage, invoice
 
 class App extends Component {
     constructor(props) {
@@ -133,7 +135,7 @@ class App extends Component {
             <div className="App">
                 <Container fluid style={shoppingPageDisplayed ? {display:"block"} : {display:"none"}}>
                     {/* Nav component in a separate file is imported and used */}
-                    <Nav />
+                    <Nav/>
                     <Row>
                     {/* using map array helper, for the list of laptops,
                     it returns a component "LaptopCard" for every laptop object in the ist */}
@@ -165,6 +167,7 @@ class App extends Component {
                         toggleDisplay={toggleDisplay}
                     />
                 </Row>
+                <Footer />
             </div>
         );
     }

@@ -1,9 +1,10 @@
 import React from "react";
-import { Col, Card, Form, Button} from 'react-bootstrap'
+import {Col, Card, Form, Button, Container, Row} from 'react-bootstrap'
 
-const Forms = (props) => {
-    const {selectedLaptop, handleChangeDetails, handleSubmit, totalPrice, handleUserDetails} = props;
+const Forms = ({selectedLaptop, handleChangeDetails, handleSubmit, totalPrice, handleUserDetails}) => {
     return (
+        <Container>
+            <Row id="forms" className="d-flex justify-content-center">
             <Col xs={12} md={10}>
                 <Card>
                     <Card.Body>
@@ -105,6 +106,8 @@ const Forms = (props) => {
                     </Card.Body>
                 </Card>
             </Col>
+            </Row>
+        </Container>
     );
 }
 export default Forms;

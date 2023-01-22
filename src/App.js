@@ -6,6 +6,8 @@ import Forms from "./components/Forms";
 import OrderInvoice from "./components/OrderInvoice";
 import Footer from "./components/Footer";
 import {laptopsData} from "./data/laptops";
+import Profile from "./components/Profile";
+import ShoppingCart from "./components/ShoppingCart";
 //TODO :
 // adding number of laptops to the order form
 // creating 4 pages: Home, shopping cart, orderPage, invoice
@@ -156,6 +158,8 @@ class App extends Component {
                             toggleDisplay={toggleDisplay}
                             />}
                         />
+                        <Route exact path="/shoppingcart" element={<ShoppingCart/>} />
+                        <Route exact path="/profile" element={<Profile/>} />
                         <Route exact path="/" element={<Navigate replace to="/home" />} />
                     </Routes>
                     <Footer/>

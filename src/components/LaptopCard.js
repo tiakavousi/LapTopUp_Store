@@ -1,6 +1,7 @@
 import {Button, Card, Col, Row} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
-const LaptopCard =({ laptops, handleSelectLaptop, shoppingCartIsEmpty }) => {
+const LaptopCard =({ laptops, handleSelectLaptop }) => {
         return(
             <Row>
                 {laptops.map( (laptop) => { return (
@@ -17,10 +18,13 @@ const LaptopCard =({ laptops, handleSelectLaptop, shoppingCartIsEmpty }) => {
                     </Card.Body>
                     <Card.Footer>
                     <Card.Text>price: {laptop.price}</Card.Text>
-                    <Button
-                        id="addToCart"
-                        onClick={() =>handleSelectLaptop(laptop)}>{(shoppingCartIsEmpty)?"Add to Cart": "Added to Cart"}
-                    </Button>
+                    {/*<Button*/}
+                    {/*    id="addToCart"*/}
+                    {/*    onClick={() => handleSelectLaptop(laptop)}>{(shoppingCartIsEmpty)?"Add to Cart": "Added to Cart"}*/}
+                    {/*</Button>*/}
+                        <Button variant={"primary"} onClick={() => handleSelectLaptop(laptop)}>
+                            <Link to={"/laptop"} style={{color: "black", textDecoration:"none"}}> Details </Link>
+                        </Button>
                     </Card.Footer>
                 </Card>
                 </Col>

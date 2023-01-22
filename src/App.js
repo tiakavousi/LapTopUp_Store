@@ -8,6 +8,7 @@ import {laptopsData} from "./data/laptops";
 import Profile from "./components/Profile";
 import ShoppingCart from "./components/ShoppingCart";
 import Checkout from "./components/Checkout";
+import Laptop from "./components/Laptop";
 
 
 class App extends Component {
@@ -40,7 +41,6 @@ class App extends Component {
         // the component's state and props when they are invoked.
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSelectLaptop = this.handleSelectLaptop.bind(this);
-        this.emptyCart = this.emptyCart.bind(this);
     }
 
     // when component mounted the laptops from data assigns to state
@@ -116,29 +116,13 @@ class App extends Component {
             let orderNumber = Math.floor(Math.random() * 100000);
             // display an alert with the user's details, laptop details, delivery address,
             // payment method, total price and order number
-            this.setState({orderNumber});
+            this.setState({orderNumber:orderNumber,shoppingCartIsEmpty: true});
         }
     }
-    emptyCart(event){
-        event.preventDefault();
-        this.setState( {
-            selectedLaptop: {
-                brand: '',
-                    model: '',
-                    cpu: '',
-                    memory: 8,
-                    storage: 256,
-                    price : ''
-            },
-            totalPrice : 0,
-                orderNumber:0,
-                shoppingCartIsEmpty: true
 
-            });
-    }
     render(){
         const {laptops, selectedLaptop, totalPrice, orderNumber, userDetails, shoppingCartIsEmpty} = this.state;
-        const {handleSelectLaptop, handleChangeDetails, handleSubmit, handleUserDetails, emptyCart} = this;
+        const {handleSelectLaptop, handleChangeDetails, handleSubmit, handleUserDetails} = this;
         return(
             <Router>
                 <div className="container">
@@ -151,6 +135,16 @@ class App extends Component {
                             shoppingCartIsEmpty={shoppingCartIsEmpty}
                             />}
                         />
+                        <Route path="/laptop" element={
+                            <Laptop
+                                shoppingCartIsEmpty={shoppingCartIsEmpty}
+                                selectedLaptop={selectedLaptop}
+                                totalPrice={totalPrice}
+                                handleChangeDetails={handleChangeDetails}
+                                handleSubmit={handleSubmit}
+                                handleUserDetails={handleUserDetails}
+                            />
+                        }/>
                         <Route path="/profile" element={<Profile/>} />
                         <Route exact path="/shoppingcart" element={
                             <ShoppingCart
@@ -175,7 +169,7 @@ class App extends Component {
                             totalPrice={totalPrice}
                             userDetails={userDetails}
                             orderNumber ={orderNumber}
-                            emptyCart={emptyCart}
+                            // emptyCart={emptyCart}
                             />}
                         />
                         <Route path="/home" element={<Navigate replace to="/home" />} />

@@ -14,28 +14,22 @@ const ShoppingCart = ({shoppingCartIsEmpty,selectedLaptop, totalPrice, handleCha
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
                         <Card id={selectedLaptop.id}  style={{ width: '18rem' }} >
                             <Card.Header>
                                 <Card.Img variant="top" src={`./photos/${selectedLaptop.imgUrl}`}/>
                             </Card.Header>
                             <Card.Body>
-                                {selectedLaptop.description}
+                                <Card.Text>
+                                {selectedLaptop.brand} {selectedLaptop.model}
+                                </Card.Text>
+                                <Card.Text>
+                                   price: {totalPrice}
+                                </Card.Text>
                             </Card.Body>
                         </Card>
-                    </Col>
-                    <Col>
-                        <LaptopDetails
-                            selectedLaptop={selectedLaptop}
-                            handleChangeDetails={handleChangeDetails}
-                            handleSubmit={handleSubmit}
-                            totalPrice={totalPrice}
-                            handleUserDetails={handleUserDetails}
-                        />
                         <Button variant="primary" type="submit">
                             <Link to={"/checkout"} style={{color:"black", textDecoration:"none"}}>Proceed to checkout</Link>
                         </Button>
-                    </Col>
                 </Row>
             </Container>
         );

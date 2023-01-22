@@ -8,10 +8,8 @@ import Footer from "./components/Footer";
 import {laptopsData} from "./data/laptops";
 import Profile from "./components/Profile";
 import ShoppingCart from "./components/ShoppingCart";
+import UserDetailsForm from "./UserDetailsForm";
 
-//TODO :
-// adding number of laptops to the order form
-// creating 4 pages: Home, shopping cart, orderPage, invoice
 
 class App extends Component {
     constructor(props) {
@@ -177,6 +175,15 @@ class App extends Component {
                                 selectedLaptop={selectedLaptop}
                                 totalPrice={totalPrice}
                                 userDetails={userDetails}
+                                handleChangeDetails={handleChangeDetails}
+                                handleSubmit={handleSubmit}
+                                handleUserDetails={handleUserDetails}
+                            />}
+                        />
+                        <Route exact path={"/checkout"} element={
+                            <UserDetailsForm
+                                handleSubmit={handleSubmit}
+                                handleUserDetails={handleUserDetails}
                             />}
                         />
                         <Route path="/profile" element={<Profile/>} />

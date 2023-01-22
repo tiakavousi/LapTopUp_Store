@@ -34,13 +34,13 @@ class App extends Component {
             },
             totalPrice : 0,
             orderNumber:0,
+            shoppingCartIsEmpty: true
         };
 
         // bind this to the handleSubmit and handleSelectLaptop methods, so they can access
         // the component's state and props when they are invoked.
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSelectLaptop = this.handleSelectLaptop.bind(this);
-        this.toggleDisplay = this.toggleDisplay.bind(this);
     }
 
     // when component mounted the laptops from data assigns to state
@@ -69,8 +69,9 @@ class App extends Component {
         // update the component's state with the selected laptop and the calculated total price
         this.setState({
             selectedLaptop: laptop,
-            totalPrice: totalPrice
-        });
+            totalPrice: totalPrice,
+            shoppingCartIsEmpty: false
+        },()=>{console.log(this.state.selectedLaptop, "\n" , this.state.shoppingCartIsEmpty)});
     }
 
     handleChangeDetails = (event) => {
@@ -127,7 +128,7 @@ class App extends Component {
     }
 
     render(){
-        const {laptops, selectedLaptop, totalPrice, orderNumber, userDetails} = this.state;
+        const {laptops, selectedLaptop, totalPrice, orderNumber, userDetails, shoppingCartIsEmpty} = this.state;
         const {handleSelectLaptop, handleChangeDetails, handleSubmit, handleUserDetails, toggleDisplay} = this;
         return(
             <Router>
@@ -158,9 +159,14 @@ class App extends Component {
                             toggleDisplay={toggleDisplay}
                             />}
                         />
-                        <Route exact path="/shoppingcart" element={<ShoppingCart/>} />
-                        <Route exact path="/profile" element={<Profile/>} />
-                        <Route exact path="/" element={<Navigate replace to="/home" />} />
+                        <Route exact path="/shoppingcart" element={
+                            <ShoppingCart
+                                shoppingCartIsEmpty={shoppingCartIsEmpty}
+                                selectedLaptop={selectedLaptop}
+                            />}
+                        />
+                        <Route path="/profile" element={<Profile/>} />
+                        <Route path="/home" element={<Navigate replace to="/home" />} />
                     </Routes>
                     <Footer/>
                 </div>

@@ -17,7 +17,7 @@ const LaptopCard =({ laptops, handleSelectLaptop }) => {
                     </Card.Body>
                     <Card.Footer>
                     <Card.Text>price: {laptop.price}</Card.Text>
-                    <Button onClick={() =>handleSelectLaptop(laptop)}>Select</Button>
+                    <Button onClick={() =>handleSelectLaptop(laptop)}>Add to Cart</Button>
                     </Card.Footer>
                 </Card>
                 </Col>

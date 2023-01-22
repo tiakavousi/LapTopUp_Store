@@ -1,12 +1,5 @@
 import {Component} from "react";
-// import {Container, Row} from "react-bootstrap";
-// import Nav from "./components/Nav";
-// import {laptopsData} from "./data/laptops";
-// import LaptopCard from "./components/LaptopCard";
-// import Forms from "./components/Forms";
-// import OrderInvoice from "./components/OrderInvoice";
-// import Footer from "./components/Footer";
-import {BrowserRouter as Router, Route, Routes, Navigate,} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Forms from "./components/Forms";
@@ -163,7 +156,7 @@ class App extends Component {
                             toggleDisplay={toggleDisplay}
                             />}
                         />
-                        <Route path="/" element={<Navigate replace to="/home" />} />
+                        <Route exact path="/" element={<Navigate replace to="/home" />} />
                     </Routes>
                     <Footer/>
                 </div>

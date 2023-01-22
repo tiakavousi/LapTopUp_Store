@@ -1,6 +1,6 @@
 import {Button, Card, Col, Row} from "react-bootstrap";
 
-const LaptopCard =({ laptops, handleSelectLaptop }) => {
+const LaptopCard =({ laptops, handleSelectLaptop, shoppingCartIsEmpty }) => {
         return(
             <Row>
                 {laptops.map( (laptop) => { return (
@@ -17,7 +17,10 @@ const LaptopCard =({ laptops, handleSelectLaptop }) => {
                     </Card.Body>
                     <Card.Footer>
                     <Card.Text>price: {laptop.price}</Card.Text>
-                    <Button onClick={() =>handleSelectLaptop(laptop)}>Add to Cart</Button>
+                    <Button
+                        id="addToCart"
+                        onClick={() =>handleSelectLaptop(laptop)}>{(shoppingCartIsEmpty)?"Add to Cart": "Added to Cart"}
+                    </Button>
                     </Card.Footer>
                 </Card>
                 </Col>

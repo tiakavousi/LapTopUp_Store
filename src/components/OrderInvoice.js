@@ -1,6 +1,9 @@
 
 import {Col, Button, Row, Container} from 'react-bootstrap';
-const OrderInvoice = ({selectedLaptop,totalPrice, userDetails, orderNumber, toggleDisplay}) => {
+import {Link} from "react-router-dom";
+
+
+const OrderInvoice = ({selectedLaptop,totalPrice, userDetails, orderNumber, toggleDisplay, emptyCart}) => {
     const paymentText =  userDetails.payment === "Credit Card" ? `Total fee ${totalPrice} has been deducted from your connected credit card.` :
         `Please provide ${totalPrice} when your purchase will be delivered.`
     return (
@@ -12,11 +15,16 @@ const OrderInvoice = ({selectedLaptop,totalPrice, userDetails, orderNumber, togg
                 <p>Please keep this number for further tracking and communication</p>
                 <hr/>
                 <h5>
-                    Your {selectedLaptop.brand},{selectedLaptop.model}, Memory: {selectedLaptop.memory}Gb , Storage: {selectedLaptop.storage}Gb has been ordered and will be delivered to {userDetails.address}
+                    Your {selectedLaptop.brand},{selectedLaptop.model},
+                    Memory: {selectedLaptop.memory}Gb ,
+                    Storage: {selectedLaptop.storage}Gb has been ordered
+                    and will be delivered to {userDetails.address}
                 </h5>
                 <h5>{paymentText}</h5>
             </Col>
-            <Button variant="primary" type="submit" onClick={toggleDisplay}> Continue Shopping</Button>
+            <Button variant="primary" type="submit" onClick={toggleDisplay}>
+                <Link to={"/home"} onClick={emptyCart}>Continue Shopping</Link>
+            </Button>
             </Row>
       </Container>
     );

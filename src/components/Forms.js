@@ -1,5 +1,6 @@
 import React from "react";
 import {Col, Card, Form, Button, Container, Row} from 'react-bootstrap'
+import {Link} from "react-router-dom";
 
 const Forms = ({selectedLaptop, handleChangeDetails, handleSubmit, totalPrice, handleUserDetails}) => {
     return (
@@ -100,7 +101,7 @@ const Forms = ({selectedLaptop, handleChangeDetails, handleSubmit, totalPrice, h
                                 </Form.Control>
                             </Form.Group>
                             <Button variant="primary" type="submit" onClick={handleSubmit}>
-                                Place order
+                                <Link to={"/orderInvoice"} style={{color:"black"}}>Place Order</Link>
                             </Button>
                         </Form>
                     </Card.Body>

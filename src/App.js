@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import {laptopsData} from "./data/laptops";
 import Profile from "./components/Profile";
 import ShoppingCart from "./components/ShoppingCart";
+import {getElement} from "bootstrap/js/src/util";
 //TODO :
 // adding number of laptops to the order form
 // creating 4 pages: Home, shopping cart, orderPage, invoice
@@ -41,6 +42,7 @@ class App extends Component {
         // the component's state and props when they are invoked.
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSelectLaptop = this.handleSelectLaptop.bind(this);
+        this.emptyCart = this.emptyCart.bind(this);
     }
 
     // when component mounted the laptops from data assigns to state
@@ -71,7 +73,7 @@ class App extends Component {
             selectedLaptop: laptop,
             totalPrice: totalPrice,
             shoppingCartIsEmpty: false
-        },()=>{console.log(this.state.selectedLaptop, "\n" , this.state.shoppingCartIsEmpty)});
+        });
     }
 
     handleChangeDetails = (event) => {
@@ -107,12 +109,6 @@ class App extends Component {
             ((parseInt(laptop.storage, 10) / 256 - 1) * 500);
 
     }
-    toggleDisplay(){
-        this.setState((prevState) => ({
-            shoppingPageDisplayed: !prevState.shoppingPageDisplayed,
-            invoiceDisplayed: !prevState.invoiceDisplayed,
-        }));
-    }
     handleSubmit(event) {
         // prevent the default behavior of the form submission
         event.preventDefault();
@@ -123,22 +119,38 @@ class App extends Component {
             // display an alert with the user's details, laptop details, delivery address,
             // payment method, total price and order number
             this.setState({orderNumber});
-            this.toggleDisplay();
         }
     }
+    emptyCart(event){
+        event.preventDefault();
+        this.setState( {
+            selectedLaptop: {
+                brand: '',
+                    model: '',
+                    cpu: '',
+                    memory: 8,
+                    storage: 256,
+                    price : ''
+            },
+            totalPrice : 0,
+                orderNumber:0,
+                shoppingCartIsEmpty: true
 
+            });
+    }
     render(){
         const {laptops, selectedLaptop, totalPrice, orderNumber, userDetails, shoppingCartIsEmpty} = this.state;
-        const {handleSelectLaptop, handleChangeDetails, handleSubmit, handleUserDetails, toggleDisplay} = this;
+        const {handleSelectLaptop, handleChangeDetails, handleSubmit, handleUserDetails, emptyCart} = this;
         return(
             <Router>
                 <div className="container">
-                    <Nav/>
+                    <Nav shoppingCartIsEmpty={shoppingCartIsEmpty} />
                     <Routes>
                         <Route path="/home" element={
                             <Home
                             laptops={laptops}
                             handleSelectLaptop={handleSelectLaptop}
+                            shoppingCartIsEmpty={shoppingCartIsEmpty}
                             />}
                         />
                         <Route path="/forms" element={
@@ -156,13 +168,15 @@ class App extends Component {
                             totalPrice={totalPrice}
                             userDetails={userDetails}
                             orderNumber ={orderNumber}
-                            toggleDisplay={toggleDisplay}
+                            emptyCart={emptyCart}
                             />}
                         />
                         <Route exact path="/shoppingcart" element={
                             <ShoppingCart
                                 shoppingCartIsEmpty={shoppingCartIsEmpty}
                                 selectedLaptop={selectedLaptop}
+                                totalPrice={totalPrice}
+                                userDetails={userDetails}
                             />}
                         />
                         <Route path="/profile" element={<Profile/>} />

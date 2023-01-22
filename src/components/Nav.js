@@ -1,8 +1,8 @@
 import {Container, Navbar} from "react-bootstrap";
 import logo from "./logo.png"
 import {Link} from "react-router-dom";
-import {FaShoppingCart, FaUser} from "react-icons/fa";
-const Nav = () => {
+import {FaHome, FaShoppingCart, FaUser} from "react-icons/fa";
+const Nav = ({shoppingCartIsEmpty}) => {
     return (
         <Navbar bg="light"  variant="light" sticky="top">
             <Container>
@@ -19,12 +19,13 @@ const Nav = () => {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
-                        Signed in as: <a href="src/components/Nav#login"> Tia</a>
+                        <Link to={"./Home"}><FaHome size='2em'/></Link>
                     </Navbar.Text>
                     <Navbar.Text>
-                        <Link to={"./Home"}>Home</Link>
-                        <Link to={"./Profile"}><FaUser size='2em'/>Profile</Link>
-                        <Link to={"./ShoppingCart"}><FaShoppingCart size='2em'/>Shopping Cart</Link>
+                        <Link to={"./Profile"}><FaUser size='2em'/></Link>
+                    </Navbar.Text>
+                    <Navbar.Text>
+                        <Link to={"./ShoppingCart"}><FaShoppingCart size='2em'/>{(shoppingCartIsEmpty)?"(0 item)":"(1 item)"}</Link>
                     </Navbar.Text>
                 </Navbar.Collapse>
             </Container>

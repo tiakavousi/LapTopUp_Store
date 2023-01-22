@@ -1,16 +1,18 @@
 
 import {FaFacebook, FaInstagram, FaPhone} from "react-icons/fa";
-import {BsFillArrowUpSquareFill} from "react-icons/bs";
-import { Container } from "react-bootstrap";
+// import {BsFillArrowUpSquareFill} from "react-icons/bs";
+import {Container} from "react-bootstrap";
 
-function ScrollToTop () {
-    return (
-        <div onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-            <BsFillArrowUpSquareFill size='2em'/>
-            <p><i>Back to top</i></p>
-        </div>
-    );
-}
+
+// function ScrollToTop () {
+//     return (
+//         <div onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+//             <BsFillArrowUpSquareFill size='2em'/>
+//             <p><i>Back to top</i></p>
+//         </div>
+//     );
+// }
+
 
 export default function Footer(){
     return (
@@ -29,7 +31,7 @@ export default function Footer(){
             </a>
             <hr/>
             <p> © 2022 Copyright: <a className="me-4" href="/home"> Tia Kavousi</a></p>
-            <ScrollToTop/>
+            {/*<ScrollToTop/>*/}
         </Container>
     );
 }

@@ -18,7 +18,7 @@ const MyNav = ({shoppingCartIsEmpty}) => {
                     </Link>
                 </Navbar.Brand>
                 <Navbar.Brand>
-                    <h4 style={{color:"gray"}}>Buy your laptop at store</h4>
+                    <h4 style={{color:"lightslategray"}}>Buy your laptop at store</h4>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">

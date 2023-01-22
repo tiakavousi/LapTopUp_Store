@@ -2,13 +2,12 @@ import {Component} from "react";
 import {BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
 import MyNav from "./components/navbar/Nav";
 import Home from "./components/Home";
-import Forms from "./components/Forms";
 import OrderInvoice from "./components/OrderInvoice";
 import Footer from "./components/Footer";
 import {laptopsData} from "./data/laptops";
 import Profile from "./components/Profile";
 import ShoppingCart from "./components/ShoppingCart";
-import UserDetailsForm from "./UserDetailsForm";
+import Checkout from "./components/Checkout";
 
 
 class App extends Component {
@@ -20,6 +19,7 @@ class App extends Component {
             laptops: [], // array to hold the list of laptops
             userDetails: {
                 name: '',
+                phoneNumber: '',
                 address: '',
                 payment: ''
             },
@@ -151,13 +151,22 @@ class App extends Component {
                             shoppingCartIsEmpty={shoppingCartIsEmpty}
                             />}
                         />
-                        <Route path="/forms" element={
-                            <Forms
-                            selectedLaptop={selectedLaptop}
-                            handleChangeDetails={handleChangeDetails}
-                            handleSubmit={handleSubmit}
-                            totalPrice={totalPrice}
-                            handleUserDetails={handleUserDetails}
+                        <Route path="/profile" element={<Profile/>} />
+                        <Route exact path="/shoppingcart" element={
+                            <ShoppingCart
+                                shoppingCartIsEmpty={shoppingCartIsEmpty}
+                                selectedLaptop={selectedLaptop}
+                                totalPrice={totalPrice}
+                                handleChangeDetails={handleChangeDetails}
+                                handleSubmit={handleSubmit}
+                                handleUserDetails={handleUserDetails}
+                            />}
+                        />
+                        <Route exact path={"/checkout"} element={
+                            <Checkout
+                                userDetails={userDetails}
+                                handleSubmit={handleSubmit}
+                                handleUserDetails={handleUserDetails}
                             />}
                         />
                         <Route path="/orderInvoice" element={
@@ -169,24 +178,6 @@ class App extends Component {
                             emptyCart={emptyCart}
                             />}
                         />
-                        <Route exact path="/shoppingcart" element={
-                            <ShoppingCart
-                                shoppingCartIsEmpty={shoppingCartIsEmpty}
-                                selectedLaptop={selectedLaptop}
-                                totalPrice={totalPrice}
-                                userDetails={userDetails}
-                                handleChangeDetails={handleChangeDetails}
-                                handleSubmit={handleSubmit}
-                                handleUserDetails={handleUserDetails}
-                            />}
-                        />
-                        <Route exact path={"/checkout"} element={
-                            <UserDetailsForm
-                                handleSubmit={handleSubmit}
-                                handleUserDetails={handleUserDetails}
-                            />}
-                        />
-                        <Route path="/profile" element={<Profile/>} />
                         <Route path="/home" element={<Navigate replace to="/home" />} />
                     </Routes>
                     <Footer/>

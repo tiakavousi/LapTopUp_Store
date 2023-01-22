@@ -1,12 +1,18 @@
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import Forms from "./Forms";
+import LaptopDetails from "./LaptopDetails";
 
 
-const ShoppingCart = ({shoppingCartIsEmpty,selectedLaptop, totalPrice, userDetails, handleChangeDetails, handleSubmit, handleUserDetails}) => {
+const ShoppingCart = ({shoppingCartIsEmpty,selectedLaptop, totalPrice, handleChangeDetails, handleSubmit, handleUserDetails}) => {
     if(!shoppingCartIsEmpty){
         return (
             <Container className="text-center">
+                <Row>
+                    <Col>
+                        <span>Please note you can buy only one laptop in every order! </span>
+                        <Link to={"/home"} style={{textDecoration:"none"}}>Continue Shopping</Link>
+                    </Col>
+                </Row>
                 <Row>
                     <Col>
                         <Card id={selectedLaptop.id}  style={{ width: '18rem' }} >
@@ -14,31 +20,20 @@ const ShoppingCart = ({shoppingCartIsEmpty,selectedLaptop, totalPrice, userDetai
                                 <Card.Img variant="top" src={`./photos/${selectedLaptop.imgUrl}`}/>
                             </Card.Header>
                             <Card.Body>
-                                <Card.Title> {selectedLaptop.model} </Card.Title>
+                                {selectedLaptop.description}
                             </Card.Body>
-                            <Card.Footer>
-                                <Button variant="primary" type="submit">
-                                    <Link to={"/checkout"} style={{color:"black", textDecoration:"none"}}>Checkout</Link>
-                                </Button>
-                            </Card.Footer>
                         </Card>
                     </Col>
                     <Col>
-                        <Card style={{ width: '30rem' }} >
-                            <Forms
-                                selectedLaptop={selectedLaptop}
-                                handleChangeDetails={handleChangeDetails}
-                                handleSubmit={handleSubmit}
-                                totalPrice={totalPrice}
-                                handleUserDetails={handleUserDetails}
-                            />
-                        </Card>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Button variant="primary" type="submit" >
-                            <Link to={"/home"} style={{color:"black" , textDecoration:"none"}}>Continue Shopping</Link>
+                        <LaptopDetails
+                            selectedLaptop={selectedLaptop}
+                            handleChangeDetails={handleChangeDetails}
+                            handleSubmit={handleSubmit}
+                            totalPrice={totalPrice}
+                            handleUserDetails={handleUserDetails}
+                        />
+                        <Button variant="primary" type="submit">
+                            <Link to={"/checkout"} style={{color:"black", textDecoration:"none"}}>Proceed to checkout</Link>
                         </Button>
                     </Col>
                 </Row>

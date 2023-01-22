@@ -1,8 +1,7 @@
 import React from "react";
-import {Col, Card, Form, Button, Container, Row} from 'react-bootstrap'
-import {Link} from "react-router-dom";
+import {Col, Card, Form, Container, Row} from 'react-bootstrap'
 
-const Forms = ({selectedLaptop, handleChangeDetails, handleSubmit, totalPrice, handleUserDetails}) => {
+const LaptopDetails = ({selectedLaptop, handleChangeDetails, totalPrice}) => {
     return (
         <Container>
             <Row id="forms" className="d-flex justify-content-center">
@@ -13,6 +12,7 @@ const Forms = ({selectedLaptop, handleChangeDetails, handleSubmit, totalPrice, h
                             <Form.Group controlId="formBrand">
                                 <Form.Label>Brand</Form.Label>
                                 <Form.Control
+                                    required
                                     type="text"
                                     name="brand"
                                     defaultValue={selectedLaptop.brand}
@@ -22,6 +22,7 @@ const Forms = ({selectedLaptop, handleChangeDetails, handleSubmit, totalPrice, h
                             <Form.Group controlId="formModel">
                                 <Form.Label>Model</Form.Label>
                                 <Form.Control
+                                    required
                                     type="text"
                                     name="model"
                                     defaultValue={selectedLaptop.model}
@@ -32,6 +33,7 @@ const Forms = ({selectedLaptop, handleChangeDetails, handleSubmit, totalPrice, h
                             <Form.Group controlId="formCPU">
                                 <Form.Label>CPU</Form.Label>
                                 <Form.Control
+                                    required
                                     type="text"
                                     name="cpu"
                                     defaultValue={selectedLaptop.cpu}
@@ -41,6 +43,7 @@ const Forms = ({selectedLaptop, handleChangeDetails, handleSubmit, totalPrice, h
                             <Form.Group controlId="formMemory">
                                 <Form.Label>Memory (GB)</Form.Label>
                                 <Form.Control
+                                    required
                                     as="select"
                                     name="memory"
                                     min="8"
@@ -56,6 +59,7 @@ const Forms = ({selectedLaptop, handleChangeDetails, handleSubmit, totalPrice, h
                             <Form.Group controlId="formStorage">
                                 <Form.Label>Storage (GB)</Form.Label>
                                 <Form.Control
+                                    required
                                     as="select"
                                     name="storage"
                                     min="256"
@@ -78,4 +82,4 @@ const Forms = ({selectedLaptop, handleChangeDetails, handleSubmit, totalPrice, h
         </Container>
     );
 }
-export default Forms;
+export default LaptopDetails;

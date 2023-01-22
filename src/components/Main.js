@@ -2,7 +2,7 @@
 // import {BrowserRouter as Router ,Route, Routes} from "react-router-dom";
 // import Nav from "./Nav";
 // import Home from "./Home";
-// import Forms from "./Forms";
+// import LaptopDetails from "./LaptopDetails";
 // import OrderInvoice from "./OrderInvoice";
 // import Footer from "./Footer";
 // import {laptopsData} from "../data/laptops";
@@ -133,7 +133,7 @@
 //                             laptops={laptops}
 //                             handleSelectLaptop={handleSelectLaptop}
 //                         />} />
-//                         <Route path="Forms" component={() => <Forms
+//                         <Route path="LaptopDetails" component={() => <LaptopDetails
 //                             selectedLaptop={selectedLaptop}
 //                             handleChangeDetails={handleChangeDetails}
 //                             handleSubmit={handleSubmit}

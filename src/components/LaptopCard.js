@@ -5,7 +5,7 @@ const LaptopCard =({ laptops, handleSelectLaptop, shoppingCartIsEmpty }) => {
             <Row>
                 {laptops.map( (laptop) => { return (
                 <Col sm={12} md={6} lg={4} >
-                <Card className="w-100 w-md-50" style={{height: "100%", overflow:"auto"}} >
+                <Card id={laptop.id} className="w-100 w-md-50" style={{height: "100%", overflow:"auto"}} >
                     <Card.Header>
                     <Card.Img variant="top" src={`./photos/${laptop.imgUrl}`}/>
                     </Card.Header>

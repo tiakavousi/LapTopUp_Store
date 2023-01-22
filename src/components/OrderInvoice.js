@@ -3,7 +3,7 @@ import {Col, Button, Row, Container} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 
 
-const OrderInvoice = ({selectedLaptop,totalPrice, userDetails, orderNumber, toggleDisplay, emptyCart}) => {
+const OrderInvoice = ({selectedLaptop,totalPrice, userDetails, orderNumber, emptyCart}) => {
     const paymentText =  userDetails.payment === "Credit Card" ? `Total fee ${totalPrice} has been deducted from your connected credit card.` :
         `Please provide ${totalPrice} when your purchase will be delivered.`
     return (
@@ -22,8 +22,8 @@ const OrderInvoice = ({selectedLaptop,totalPrice, userDetails, orderNumber, togg
                 </h5>
                 <h5>{paymentText}</h5>
             </Col>
-            <Button variant="primary" type="submit" onClick={toggleDisplay}>
-                <Link to={"/home"} onClick={emptyCart}>Continue Shopping</Link>
+            <Button variant="primary" type="submit" onClick={emptyCart}>
+                <Link to={"/home"}>Continue Shopping</Link>
             </Button>
             </Row>
       </Container>

@@ -1,6 +1,6 @@
 import {Component} from "react";
 import {BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
-import Nav from "./components/Nav";
+import MyNav from "./components/navbar/Nav";
 import Home from "./components/Home";
 import Forms from "./components/Forms";
 import OrderInvoice from "./components/OrderInvoice";
@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 import {laptopsData} from "./data/laptops";
 import Profile from "./components/Profile";
 import ShoppingCart from "./components/ShoppingCart";
-import {getElement} from "bootstrap/js/src/util";
+
 //TODO :
 // adding number of laptops to the order form
 // creating 4 pages: Home, shopping cart, orderPage, invoice
@@ -144,7 +144,7 @@ class App extends Component {
         return(
             <Router>
                 <div className="container">
-                    <Nav shoppingCartIsEmpty={shoppingCartIsEmpty} />
+                    <MyNav shoppingCartIsEmpty={shoppingCartIsEmpty} />
                     <Routes>
                         <Route path="/home" element={
                             <Home

@@ -14,7 +14,7 @@ const ShoppingCart = ({shoppingCartIsEmpty,selectedLaptop, totalPrice, userDetai
                     <Link to={"/forms"} style={{color:"black"}}>Checkout</Link>
                 </Button>
                 <Button variant="primary" type="submit">
-                    <Link to={"/home"} style={{color:"black"}}>Continue Shopping</Link>
+                    <Link to={"/home"} >Continue Shopping</Link>
                 </Button>
             </>
         );

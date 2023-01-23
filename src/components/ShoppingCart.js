@@ -1,37 +1,25 @@
-import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import {Button, Card, Col, Container, Row, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import LaptopDetails from "./LaptopDetails";
+import LaptopCustomise from "./LaptopCustomise";
 
 
-const ShoppingCart = ({shoppingCartIsEmpty,selectedLaptop, totalPrice, handleChangeDetails, handleSubmit, handleUserDetails}) => {
+const ShoppingCart = ({shoppingCartIsEmpty,selectedLaptop, totalPrice}) => {
     if(!shoppingCartIsEmpty){
         return (
-            <Container className="text-center">
-                <Row>
-                    <Col>
-                        <span>Please note you can buy only one laptop in every order! </span>
-                        <Link to={"/home"} style={{textDecoration:"none"}}>Continue Shopping</Link>
-                    </Col>
-                </Row>
-                <Row>
-                        <Card id={selectedLaptop.id}  style={{ width: '18rem' }} >
-                            <Card.Header>
-                                <Card.Img variant="top" src={`./photos/${selectedLaptop.imgUrl}`}/>
-                            </Card.Header>
-                            <Card.Body>
-                                <Card.Text>
-                                {selectedLaptop.brand} {selectedLaptop.model}
-                                </Card.Text>
-                                <Card.Text>
-                                   price: {totalPrice}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                        <Button variant="primary" type="submit">
-                            <Link to={"/checkout"} style={{color:"black", textDecoration:"none"}}>Proceed to checkout</Link>
-                        </Button>
-                </Row>
-            </Container>
+            <div >
+                <h5>Shopping cart</h5>
+                    <Table hover responsive bordered className= "d-flex align-items-center justify-content-center">
+                        <tbody >
+                        <tr>
+                            <td><img src={`./photos/${selectedLaptop.imgUrl}`} width={"200px"} alt={"laptop picture"}/></td>
+                            <td><span>{selectedLaptop.brand} {selectedLaptop.model}  ${totalPrice}</span></td>
+                            <td><Button variant="primary" type="submit">
+                                <Link to={"/checkout"} style={{color:"black", textDecoration:"none"}}>Proceed to checkout</Link>
+                            </Button></td>
+                        </tr>
+                        </tbody>
+                    </Table>
+            </div>
         );
     } else {return(
         <>

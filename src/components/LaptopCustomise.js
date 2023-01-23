@@ -1,13 +1,8 @@
 import React from "react";
-import {Col, Card, Form, Container, Row} from 'react-bootstrap'
+import {Form} from 'react-bootstrap'
 
-const LaptopDetails = ({selectedLaptop, handleChangeDetails, totalPrice}) => {
+const LaptopCustomise = ({selectedLaptop, handleChangeDetails, totalPrice}) => {
     return (
-        <Container>
-            <Row id="forms" className="d-flex justify-content-center">
-            <Col xs={12} md={10}>
-                <Card>
-                    <Card.Body>
                         <Form>
                             <Form.Group controlId="formBrand">
                                 <Form.Label>Brand</Form.Label>
@@ -75,11 +70,6 @@ const LaptopDetails = ({selectedLaptop, handleChangeDetails, totalPrice}) => {
                             <hr />
                             <h5 className="text-center">Total Price: ${totalPrice}</h5>
                         </Form>
-                    </Card.Body>
-                </Card>
-            </Col>
-            </Row>
-        </Container>
     );
 }
-export default LaptopDetails;
+export default LaptopCustomise;

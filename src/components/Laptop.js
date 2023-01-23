@@ -1,10 +1,10 @@
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import LaptopDetails from "./LaptopDetails";
+import LaptopCustomise from "./LaptopCustomise";
 
 const Laptop = ({selectedLaptop, totalPrice, handleChangeDetails, handleSubmit, handleUserDetails}) =>{
     return (
-        <Container className="text-center">
+        <Container className="text-center" fluid style={{border:"black solid 1px"}}>
             <Row>
                 <Col>
                     <span>Please note you can buy only one laptop in every order! </span>
@@ -12,8 +12,8 @@ const Laptop = ({selectedLaptop, totalPrice, handleChangeDetails, handleSubmit, 
                 </Col>
             </Row>
             <Row>
-                <Col>
-                    <Card id={selectedLaptop.id}  style={{ width: '18rem' }} >
+                <Col xs={6} md={4} lg={4}>
+                    <Card id={selectedLaptop.id}>
                         <Card.Header>
                             <Card.Img variant="top" src={`./photos/${selectedLaptop.imgUrl}`}/>
                         </Card.Header>
@@ -22,8 +22,8 @@ const Laptop = ({selectedLaptop, totalPrice, handleChangeDetails, handleSubmit, 
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col>
-                    <LaptopDetails
+                <Col xs={12} md={8} lg={8}>
+                    <LaptopCustomise
                         selectedLaptop={selectedLaptop}
                         handleChangeDetails={handleChangeDetails}
                         handleSubmit={handleSubmit}

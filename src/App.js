@@ -1,6 +1,6 @@
 import {Component} from "react";
 import {BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
-import MyNav from "./components/navbar/Nav";
+import MyNav from "./components/Nav";
 import Home from "./components/Home";
 import OrderInvoice from "./components/OrderInvoice";
 import Footer from "./components/Footer";
@@ -9,8 +9,9 @@ import Profile from "./components/Profile";
 import ShoppingCart from "./components/ShoppingCart";
 import Checkout from "./components/Checkout";
 import Laptop from "./components/Laptop";
-
-
+// App component is the only place in the program that contains state,
+// other components get their own props and change it, this way the change the
+// states without containing them
 class App extends Component {
     constructor(props) {
         // call the parent class constructor
@@ -121,13 +122,25 @@ class App extends Component {
     }
 
     render(){
+        // destructuring the state object and assigning its properties to individual
+        // variables.this make them easy to use later
         const {laptops, selectedLaptop, totalPrice, orderNumber, userDetails, shoppingCartIsEmpty} = this.state;
+        //destructuring the component's methods and assigning them to individual variables.
         const {handleSelectLaptop, handleChangeDetails, handleSubmit, handleUserDetails} = this;
         return(
+            //A component from the react-router-dom library that is used to
+            // handle client-side routing in the app.
             <Router>
                 <div className="container">
+                    {/*custom component that is rendered within the <div> element in every Route */}
                     <MyNav shoppingCartIsEmpty={shoppingCartIsEmpty} />
+                    {/* <Routes> is a component from the react-router-dom library that is used to render the
+                    appropriate component based on the current URL.*/}
                     <Routes>
+                        {/* <Route> is a component from the react-router-dom library that is used to
+                        define a specific route and the component that should be rendered for that route
+                        path property is to specify the path of the component and element gets the actual
+                        component  to be rendered as a Route*/}
                         <Route path="/home" element={
                             <Home
                             laptops={laptops}
@@ -169,7 +182,6 @@ class App extends Component {
                             totalPrice={totalPrice}
                             userDetails={userDetails}
                             orderNumber ={orderNumber}
-                            // emptyCart={emptyCart}
                             />}
                         />
                         <Route path="/home" element={<Navigate replace to="/home" />} />

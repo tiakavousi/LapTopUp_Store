@@ -1,51 +1,27 @@
-import LaptopCard from "./LaptopCard";
+import LaptopCards from "./LaptopCards";
 import {Container, Row} from "react-bootstrap";
-import { Button } from './Styles';
-import {useState} from "react";
-import {FaArrowCircleUp} from "react-icons/fa";
+import ScrollButton from "./ScrollButton";
+// This component is a functional component which renders a LaptopCard component and
+// pass the props laptops, handleSelectLaptop, shoppingCartIsEmpty to it.
+// It also renders the ScrollButton component which will be used to take the user to the top of the page when clicked.
+// It returns a div with class App and inside it, a Container and Row component from the "react-bootstrap" library are rendered.
+// The LaptopCard component is rendered inside the Row component and the ScrollButton component is rendered after that.
 
-const ScrollButton = () =>{
-
-    const [visible, setVisible] = useState(false)
-
-    const toggleVisible = () => {
-        const scrolled = document.documentElement.scrollTop;
-        if (scrolled > 300){
-            setVisible(true)
-        }
-        else if (scrolled <= 300){
-            setVisible(false)
-        }
-    };
-
-    const scrollToTop = () =>{
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    };
-
-    window.addEventListener('scroll', toggleVisible);
-
-    return (
-        <Button>
-            <FaArrowCircleUp onClick={scrollToTop}
-                             style={{display: visible ? 'inline' : 'none'}} />
-        </Button>
-    );
-}
-
-const Home = ({laptops,handleSelectLaptop, shoppingCartIsEmpty }) =>{
+    const Home = ({laptops,handleSelectLaptop, shoppingCartIsEmpty }) =>{
     return(
         <div className="App">
             <Container fluid>
+                {/* LaptopCards component is rendered here, and the props laptops,
+                handleSelectLaptop, and shoppingCartIsEmpty are passed to it.*/}
                 <Row>
-                    <LaptopCard
+                    <LaptopCards
                         laptops={laptops}
                         handleSelectLaptop={handleSelectLaptop}
                         shoppingCartIsEmpty={shoppingCartIsEmpty}
                     />
                 </Row>
+                {/* ScrollButton component is rendered here, it will be used to take
+                 the user to the top of the page when clicked.*/}
                 <ScrollButton />
             </Container>
         </div>

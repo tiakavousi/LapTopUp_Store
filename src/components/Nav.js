@@ -1,11 +1,11 @@
 import {Container, Nav, Navbar} from "react-bootstrap";
-import logo from "../logo.png"
+import logo from "./logo.png"
 import {Link} from "react-router-dom";
 import {FaHome, FaShoppingCart, FaUser} from "react-icons/fa";
 const MyNav = ({shoppingCartIsEmpty}) => {
     return (
         <Navbar bg="light" variant="light" expand="lg" sticky="top">
-            <Container>
+            <Container id="navbar">
                 <Navbar.Brand className="me-5" href="#home">
                     <Link to={"./Home"}>
                         <img

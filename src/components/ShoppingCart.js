@@ -1,10 +1,13 @@
-import {Button, Card, Col, Container, Row, Table} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import LaptopCustomise from "./LaptopCustomise";
 
-
+// ShoppingCart is a functional component that takes in three props,
+// shoppingCartIsEmpty, selectedLaptop, and totalPrice
 const ShoppingCart = ({shoppingCartIsEmpty,selectedLaptop, totalPrice}) => {
+    // It checks if the shopping cart is not empty
     if(!shoppingCartIsEmpty){
+        // If the shopping cart is not empty, it returns a JSX element
+        // that renders some elements displaying selected laptop
         return (
             <div >
                 <h5>Shopping cart</h5>
@@ -21,11 +24,13 @@ const ShoppingCart = ({shoppingCartIsEmpty,selectedLaptop, totalPrice}) => {
                     </Table>
             </div>
         );
+    //If the shopping cart is empty, it returns a JSX element that renders a
+    // a message which says shopping cart is empty and provides a button to go back to home page
     } else {return(
         <>
             <h1>Shopping Cart is empty</h1>
-            <Button variant="primary" type="submit">
-                <Link to={"/home"} >Continue Shopping</Link>
+            <Button variant="primary" type="submit" >
+                <Link to={"/home"} style={{color:"black", textDecoration:"none"}} >Continue Shopping</Link>
             </Button>
         </>
     );}

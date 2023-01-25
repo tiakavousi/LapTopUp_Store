@@ -2,9 +2,9 @@ import {useState} from "react";
 import {Button} from "./Styles";
 import {FaArrowCircleUp} from "react-icons/fa";
 
-
 // This component uses useState hook to keep track of the visibility of the button,
-// and has a function toggleVisible that check the current scroll position and update the visibility of the button.
+// and has a function toggleVisible that check the current scroll position
+// and update the visibility of the button.
 // It also has a function scrollToTop that is used to smooth scroll the user to the top of the page.
 // And it has an event listener on the window that calls the toggleVisible function on scroll.
 // It returns a button with an FaArrowCircleUp icon component from the "react-icons" library,
